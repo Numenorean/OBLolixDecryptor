@@ -12,11 +12,11 @@ from py3rijndael import RijndaelCbc, ZeroPadding
 def decrypt(file):
     key = 'ay$a5%&j'
     IV = 'abc@9879'
-	PBKDF2_key = '0THISISOBmodedByForlaxNIGGAs'
-	file_content = file.read()
+    PBKDF2_key = '0THISISOBmodedByForlaxNIGGAs'
+    file_content = file.read()
     body = re.search('"Body": "(\w+)"', file_content)
-	if body is None:return -1
-	else:body = body.group(1)
+    if body is None:return -1
+    else:body = body.group(1)
     des_object = DES.new(key, DES.MODE_CBC, IV)
     array = []
     for i in range(int(len(body)/2)):
@@ -45,8 +45,8 @@ def decrypt(file):
 if __name__ == '__main__':
     file = open(sys.argv[1], 'r')
     text = decrypt(file).replace('\x12', '').replace('\r', '').replace('\t', '')
-	if text == -1:
-		print('Failed to decrypt')
+    if text == -1:
+        print('Failed to decrypt')
     with open(sys.argv[1]+'_Decrypted.loli', 'w') as f:
         f.write(text)
     print('Decrypted')
